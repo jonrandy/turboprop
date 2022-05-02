@@ -1,0 +1,25 @@
+{
+  "name": "picko",
+  "version": "0.0.1",
+  "description": "Metho-like library for iterable access",
+  "main": "picko.js",
+  "type": "module",
+  "module": "picko.js",
+  "sideEffects": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "picko",
+    "metho",
+    "array",
+    "string",
+    "iterable",
+    "access",
+    "syntax"
+  ],
+  "author": "Jon Randy",
+  "license": "MIT"
+}
