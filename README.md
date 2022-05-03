@@ -1,1 +1,1 @@
-# Picko - A new method to pick from iterables
+# Picko - A new method to pick
