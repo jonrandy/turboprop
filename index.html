@@ -17,8 +17,19 @@
 		const str = "Jonathan"
 		const arr = [...str]
 
+		const keys = p(['a', 'd', 'e'])
+		const obj = {
+			a: 123,
+			b: 'frog',
+			c: null,
+			d: [5,5],
+			e: {a:1}
+		}
+
 		console.log(str[getThese])
 		console.log(arr[p([0,1,2,3,5])])
+		console.log(obj[keys])
+		console.log(obj[p('c')])
 		console.log(Array.isArray(getThese))
 
 	</script>
