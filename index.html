@@ -13,7 +13,7 @@
 		// const a = picko([6,7])
 		// const t = picko([a,5])
 		const getThese = p()
-		getThese.push(1,2,3,4)
+		getThese.push(1,[2,3],4)
 		const str = "Jonathan"
 		const arr = [...str]
 
@@ -27,6 +27,7 @@
 		}
 
 		console.log(str[getThese])
+		console.log(arr[getThese])
 		console.log(arr[p([0,1,2,3,5])])
 		console.log(obj[keys])
 		console.log(obj[p('c')])
