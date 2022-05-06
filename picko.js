@@ -19,7 +19,7 @@ export default function picko(source=[], targets=defaultTargets) {
 		const tempSym = Symbol()
 		const pickKeys = function () {
 			const ret = keys.reduce((all, key) => {
-				if (Array.isArray(key) && !isPicko(key)) key = picko(key)
+				if (Array.isArray(key) && !isPicko(key)) key = picko(key) // Will also need to check here if global picko is switched on - if so, don't do this
 				return this[pickoConcatMethod](all, this[key], key)
 			}, this[pickoBase])
 			targets.forEach(([target]) => {
