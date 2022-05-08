@@ -1,1 +1,1 @@
-# Picko - A new method to pick
+# Picko - Use Arrays as Property Accessors
