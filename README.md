@@ -1,1 +1,1 @@
-# Picko - Use Arrays as Property Accessors
+# Multiprop - Use Arrays as Property Accessors
