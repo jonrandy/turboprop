@@ -36,6 +36,22 @@
 		const doit = p(Array.prototype)
 		console.log("Hello!"[[1,2,5]])
 
+		const jonObj = {a: 3}
+		console.log(jonObj) // {a: 3}
+		jonObj[['b', 'c']] = ['Hello', 'World']
+		console.log(jonObj) // {a: 3, b: 'Hello', c: 'World'}
+
+		const jonArr = [1, 2, 3]
+		console.log(jonArr) // [1, 2, 3]
+		jonArr[[0, 2]] = [4, 0]
+		console.log(jonArr) // [4, 2, 0]
+
+		// strings are immutable, so this won't work
+		const jonStr = "Jon"
+		console.log(jonStr)
+		jonStr[[0, 2]] = ['N', 'k']
+		console.log(jonStr)
+
 	</script>
 
 </body>

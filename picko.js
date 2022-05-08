@@ -14,10 +14,10 @@ export default function picko(source=[], targets=defaultTargets) {
 	if (!Array.isArray(source)) source = [source]
 
 	source[pickoMarker] = true
-	source[Symbol.toPrimitive] = function() {
+	source[Symbol.toPrimitive] = function () {
 		const keys = this
 		const tempSym = Symbol()
-		const pickKeys = function () {
+		const get = function () {
 			const ret = keys.reduce((all, key) => {
 				if (Array.isArray(key) && !isPicko(key)) key = picko(key) // Will also need to check here if global picko is switched on - if so, don't do this
 				return this[pickoConcatMethod](all, this[key], key)
@@ -27,8 +27,16 @@ export default function picko(source=[], targets=defaultTargets) {
 			})
 			return ret
 		}
+		const set = function (values) {
+			keys.forEach((key, i) => {
+				this[key] = values[i]
+			})
+			targets.forEach(([target]) => {
+				delete target[tempSym]
+			})
+		}
 		targets.forEach(([target, base, concatMethod]) => {
-			Object.defineProperty(target, tempSym, { configurable: true, get:pickKeys})
+			Object.defineProperty(target, tempSym, { configurable: true, get, set})
 			target[pickoConcatMethod] = concatMethod
 			target[pickoBase] = base
 		})
