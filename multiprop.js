@@ -1,7 +1,7 @@
 const
-	pickoConcatMethod = Symbol('method'),
-	pickoBase = Symbol('base'),
-	pickoMarker = Symbol('picko')
+	multipropConcatMethod = Symbol('method'),
+	multipropBase = Symbol('base'),
+	multipropMarker = Symbol('multiprop')
 
 const defaultTargets = [
 	[String.prototype, '', (str, i) => str+i],
@@ -9,19 +9,19 @@ const defaultTargets = [
 	[Object.prototype, {}, (obj, i, key) => ({...obj, [key]:i})]
 ]
 
-export default function picko(source=[], targets=defaultTargets) {
+export default function multiprop(source=[], targets=defaultTargets) {
 
 	if (!Array.isArray(source)) source = [source]
 
-	source[pickoMarker] = true
+	source[multipropMarker] = true
 	source[Symbol.toPrimitive] = function () {
 		const keys = this
 		const tempSym = Symbol()
 		const get = function () {
 			const ret = keys.reduce((all, key) => {
-				if (Array.isArray(key) && !isPicko(key)) key = picko(key) // Will also need to check here if global picko is switched on - if so, don't do this
-				return this[pickoConcatMethod](all, this[key], key)
-			}, this[pickoBase])
+				if (Array.isArray(key) && !isMultipropArray(key)) key = multiprop(key) // Will also need to check here if global multiprop is switched on - if so, don't do this
+				return this[multipropConcatMethod](all, this[key], key)
+			}, this[multipropBase])
 			targets.forEach(([target]) => {
 				delete target[tempSym]
 			})
@@ -37,8 +37,8 @@ export default function picko(source=[], targets=defaultTargets) {
 		}
 		targets.forEach(([target, base, concatMethod]) => {
 			Object.defineProperty(target, tempSym, { configurable: true, get, set})
-			target[pickoConcatMethod] = concatMethod
-			target[pickoBase] = base
+			target[multipropConcatMethod] = concatMethod
+			target[multipropBase] = base
 		})
 		return tempSym
 	}
@@ -47,4 +47,4 @@ export default function picko(source=[], targets=defaultTargets) {
 
 }
 
-const isPicko = toCheck => toCheck[pickoMarker]
+const isMultipropArray = toCheck => toCheck[multipropMarker]

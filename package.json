@@ -1,10 +1,10 @@
 {
-  "name": "picko",
+  "name": "multiprop",
   "version": "0.0.1",
-  "description": "Metho-like library to use arrays as property accessors",
-  "main": "picko.js",
+  "description": "Metho-like library to allow use of arrays as property accessors",
+  "main": "multiprop.js",
   "type": "module",
-  "module": "picko.js",
+  "module": "multiprop.js",
   "sideEffects": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
   "keywords": [
     "js",
     "javascript",
-    "picko",
+    "multiprop",
     "metho",
     "array",
     "string",
