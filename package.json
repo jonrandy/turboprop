@@ -1,7 +1,7 @@
 {
   "name": "picko",
   "version": "0.0.1",
-  "description": "Metho-like library for iterable access",
+  "description": "Metho-like library to use arrays as property accessors",
   "main": "picko.js",
   "type": "module",
   "module": "picko.js",
@@ -16,9 +16,12 @@
     "metho",
     "array",
     "string",
-    "iterable",
-    "access",
-    "syntax"
+    "property",
+    "accessor",
+    "properties",
+    "accessors",
+    "syntax",
+    "pick"
   ],
   "author": "Jon Randy",
   "license": "MIT"
