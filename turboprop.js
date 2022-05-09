@@ -1,7 +1,7 @@
 const
-	multipropConcatMethod = Symbol('method'),
-	multipropBase = Symbol('base'),
-	multipropMarker = Symbol('multiprop')
+	turbopropConcatMethod = Symbol('method'),
+	turbopropBase = Symbol('base'),
+	turbopropMarker = Symbol('turboprop')
 
 const defaultTargets = [
 	[String.prototype, '', (str, i) => str+i],
@@ -9,19 +9,19 @@ const defaultTargets = [
 	[Object.prototype, {}, (obj, i, key) => ({...obj, [key]:i})]
 ]
 
-export default function multiprop(source=[], targets=defaultTargets) {
+export default function turboprop(source=[], targets=defaultTargets) {
 
 	if (!Array.isArray(source)) source = [source]
 
-	source[multipropMarker] = true
+	source[turbopropMarker] = true
 	source[Symbol.toPrimitive] = function () {
 		const keys = this
 		const tempSym = Symbol()
 		const get = function () {
 			const ret = keys.reduce((all, key) => {
-				if (Array.isArray(key) && !isMultipropArray(key)) key = multiprop(key) // Will also need to check here if global multiprop is switched on - if so, don't do this
-				return this[multipropConcatMethod](all, this[key], key)
-			}, this[multipropBase])
+				if (Array.isArray(key) && !isTurbopropArray(key)) key = turboprop(key) // Will also need to check here if global turboprop is switched on - if so, don't do this
+				return this[turbopropConcatMethod](all, this[key], key)
+			}, this[turbopropBase])
 			targets.forEach(([target]) => {
 				delete target[tempSym]
 			})
@@ -37,8 +37,8 @@ export default function multiprop(source=[], targets=defaultTargets) {
 		}
 		targets.forEach(([target, base, concatMethod]) => {
 			Object.defineProperty(target, tempSym, { configurable: true, get, set})
-			target[multipropConcatMethod] = concatMethod
-			target[multipropBase] = base
+			target[turbopropConcatMethod] = concatMethod
+			target[turbopropBase] = base
 		})
 		return tempSym
 	}
@@ -47,4 +47,4 @@ export default function multiprop(source=[], targets=defaultTargets) {
 
 }
 
-const isMultipropArray = toCheck => toCheck[multipropMarker]
+const isTurbopropArray = toCheck => toCheck[turbopropMarker]
