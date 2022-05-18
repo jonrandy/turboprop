@@ -6,7 +6,7 @@ const
 	TARGET_STRING = {
 		object: String.prototype,
 		methods: {
-			getter: (keys, str) => keys.reduce((newStr, key) => newStr + str[key], '')
+			getter: (keys, str) => keys.reduce((newStr, key) => newStr + str[key], ''),
 			setter: false
 		}
 	},
@@ -46,13 +46,13 @@ export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 		const get = function () {
 			// // Do this for all keys before passing
 			// if (Array.isArray(key) && !isTurbopropArray(key)) key = turboprop(key) // Will also need to check here if global turboprop is switched on - if so, don't do this
-			const ret = this[TURBOPROP_METHODS.getter](keys, this)
+			const ret = this[TURBOPROP_METHODS].getter(keys, this)
 			removeTempSymbols()
 			return ret
 		}
 
 		const set = function (values) {
-			this[TURBOPROP_METHODS.setter](keys, values, this)
+			this[TURBOPROP_METHODS].setter(keys, values, this)
 			removeTempSymbols()
 		}
 
