@@ -25,11 +25,7 @@ const
 		}
 	}
  
-const DEFAULT_TARGETS = [
-	TARGET_STRING,
-	TARGET_ARRAY,
-	TARGET_OBJECT
-]
+const DEFAULT_TARGETS = [ TARGET_STRING, TARGET_ARRAY, TARGET_OBJECT ]
 
 export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 
@@ -44,24 +40,24 @@ export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 			removeTempSymbols = () => targets.forEach(({object}) => {
 				delete object[tempSym]
 				delete object[TURBOPROP_METHODS]
-			})
-
-		const get = function () {
-			const ret = this[TURBOPROP_METHODS].getter(keys, this)
-			removeTempSymbols()
-			return ret
-		}
-
-		const set = function (values) {
-			this[TURBOPROP_METHODS].setter && this[TURBOPROP_METHODS].setter(keys, values, this)
-			removeTempSymbols()
-		}
+			}),
+			get = function () {
+				const ret = this[TURBOPROP_METHODS].getter(keys, this)
+				removeTempSymbols()
+				return ret
+			},
+			set = function (values) {
+				this[TURBOPROP_METHODS].setter && this[TURBOPROP_METHODS].setter(keys, values, this)
+				removeTempSymbols()
+			}
 
 		targets.forEach(({object, methods}) => {
 			Object.defineProperty(object, tempSym, { configurable: true, get, set})
 			object[TURBOPROP_METHODS] = methods
 		})
+
 		return tempSym
+
 	}
 
 	return source
