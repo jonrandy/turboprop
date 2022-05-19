@@ -1,6 +1,6 @@
 const
 	TURBOPROP_MARKER = Symbol('turboprop'),
-	TURBOPROP_METHODS = Symbol('methods')
+	TURBOPROP_METHODS = Symbol('turboprop_methods')
 
 const
 	TARGET_STRING = {
@@ -40,8 +40,11 @@ export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 
 		const
 			keys = this.map(key => (Array.isArray(key) && !isTurbopropArray(key)) ? turboprop(key, targets) : key),
-			tempSym = Symbol(),
-			removeTempSymbols = () => targets.forEach(({object}) => delete object[tempSym])
+			tempSym = Symbol('turboprop_singleUseMethod'),
+			removeTempSymbols = () => targets.forEach(({object}) => {
+				delete object[tempSym]
+				delete object[TURBOPROP_METHODS]
+			})
 
 		const get = function () {
 			const ret = this[TURBOPROP_METHODS].getter(keys, this)
