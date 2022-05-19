@@ -34,7 +34,6 @@ const DEFAULT_TARGETS = [
 export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 
 	if (!Array.isArray(source)) source = [source]
-
 	source[TURBOPROP_MARKER] = true
 
 	source[Symbol.toPrimitive] = function () {
@@ -66,4 +65,14 @@ export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 
 }
 
-const isTurbopropArray = toCheck => toCheck[TURBOPROP_MARKER]
+export const isTurbopropArray = toCheck => toCheck[TURBOPROP_MARKER]
+
+export const useGlobally = (state = true, targets = DEFAULT_TARGETS) => {
+	if (state) {
+		turboprop(Array.prototype, targets)
+	} else {
+		delete Array.prototype[Symbol.toPrimitive]	
+	}
+}
+
+useGlobally()
