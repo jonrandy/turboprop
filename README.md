@@ -41,7 +41,7 @@ console.log(obj2) // {item: 'box', colours:['red', 'blue', 'green']}
 
 ```
 
-Currently, when the libray is loaded, the standard behaviours shown above get added to `Array.prototype` - resulting in ANY array gaining the ability to behave like this. The downside of this is the normal behaviour of an array when being co-erced to a string - is lost. I may yet decide to switch off this default behaviour as it could obviously break existing code relying on the standard 'coercion to string' functionality of arrays.
+Currently, when the libray is loaded, the standard behaviours shown above get added to `Array.prototype` - resulting in ANY array gaining the ability to behave like this. The downside of this is the normal behaviour of an array when being coerced to a string - is lost. I may yet decide to switch off this default behaviour as it could obviously break existing code relying on the standard 'coercion to string' functionality of arrays.
 
 
 
