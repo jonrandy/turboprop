@@ -1,7 +1,6 @@
 const
 	TURBOPROP_MARKER = Symbol('turboprop')
 	
-
 const
 	TARGET_STRING = {
 		object: String.prototype,
@@ -27,7 +26,7 @@ const
  
 const DEFAULT_TARGETS = [ TARGET_STRING, TARGET_ARRAY, TARGET_OBJECT ]
 
-export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
+export function initialise(source = [], targets = DEFAULT_TARGETS) {
 
 	const TURBOPROP_METHODS = Symbol('turboprop_methods')
 
@@ -37,7 +36,7 @@ export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 	source[Symbol.toPrimitive] = function () {
 
 		const
-			keys = this.map(key => (Array.isArray(key) && !isTurbopropArray(key)) ? turboprop(key, targets) : key),
+			keys = this.map(key => (Array.isArray(key) && !isInitialisedArray(key)) ? initialise(key, targets) : key),
 			tempSym = Symbol('turboprop_singleUseMethod'),
 			removeTempSymbols = () => targets.forEach(({object}) => {
 				delete object[tempSym]
@@ -66,14 +65,14 @@ export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
 
 }
 
-export const isTurbopropArray = toCheck => toCheck[TURBOPROP_MARKER]
+export const isInitialisedArray = toCheck => toCheck[TURBOPROP_MARKER]
 
-export const useGlobally = (state = true, targets = DEFAULT_TARGETS) => {
+export const initialiseGlobally = (state = true, targets = DEFAULT_TARGETS) => {
 	if (state) {
-		turboprop(Array.prototype, targets)
+		initialise(Array.prototype, targets)
 	} else {
 		delete Array.prototype[Symbol.toPrimitive]	
 	}
 }
 
-useGlobally()
+initialiseGlobally()
