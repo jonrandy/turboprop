@@ -1,6 +1,6 @@
 const
-	TURBOPROP_MARKER = Symbol('turboprop'),
-	TURBOPROP_METHODS = Symbol('turboprop_methods')
+	TURBOPROP_MARKER = Symbol('turboprop')
+	
 
 const
 	TARGET_STRING = {
@@ -28,6 +28,8 @@ const
 const DEFAULT_TARGETS = [ TARGET_STRING, TARGET_ARRAY, TARGET_OBJECT ]
 
 export default function turboprop(source = [], targets = DEFAULT_TARGETS) {
+
+	const TURBOPROP_METHODS = Symbol('turboprop_methods')
 
 	if (!Array.isArray(source)) source = [source]
 	source[TURBOPROP_MARKER] = true
