@@ -8,16 +8,14 @@
 
 
 	<script type="module">
-		import {initialise as p} from "./turboprop.js"
+		import * as turboprop from "./turboprop.js"
 
-		// const a = p([6,7])
-		// const t = p([a,5])
-		const getThese = p()
+		const getThese = turboprop.initialise()
 		getThese.push(1,[2,3],4)
 		const str = "Jonathan"
 		const arr = [...str]
 
-		const keys = p(['a', 'd', 'e'])
+		const keys = turboprop.initialise(['a', 'd', 'e'])
 		const obj = {
 			a: 123,
 			b: 'frog',
@@ -28,12 +26,15 @@
 
 		console.log(str[getThese])
 		console.log(arr[getThese])
-		console.log(arr[p([0,1,2,3,5])])
+		console.log(arr[turboprop.initialise([0,1,2,3,5])])
 		console.log(obj[keys])
-		console.log(obj[p('c')])
+		console.log(obj[turboprop.initialise('c')])
 		console.log(Array.isArray(getThese))
 
-		const doit = p(Array.prototype)
+		console.log("Initialising globally...")
+		turboprop.initialiseGlobally()
+
+
 		console.log("Hello!"[[1,2,5]])
 
 		const jonObj = {a: 3}

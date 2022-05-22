@@ -1,7 +1,6 @@
-const
-	TURBOPROP_MARKER = Symbol('turboprop')
+const TURBOPROP_MARKER = Symbol('turboprop')
 	
-const
+export const
 	TARGET_STRING = {
 		object: String.prototype,
 		methods: {
@@ -33,7 +32,10 @@ export function initialise(source = [], targets = DEFAULT_TARGETS) {
 	if (!Array.isArray(source)) source = [source]
 	source[TURBOPROP_MARKER] = true
 
-	source[Symbol.toPrimitive] = function () {
+	source[Symbol.toPrimitive] = function (hint) {
+
+		// retain normal behaviour of array coercion if asked for it
+		if (hint === 'default') return this.toString()
 
 		const
 			keys = this.map(key => (Array.isArray(key) && !isInitialisedArray(key)) ? initialise(key, targets) : key),
@@ -74,5 +76,3 @@ export const initialiseGlobally = (state = true, targets = DEFAULT_TARGETS) => {
 		delete Array.prototype[Symbol.toPrimitive]	
 	}
 }
-
-initialiseGlobally()
