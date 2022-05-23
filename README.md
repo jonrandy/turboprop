@@ -52,9 +52,11 @@ console.log(obj2)   // {item: 'box', colours:['red', 'blue', 'green']}
 If you would like the above standard behaviours to be added to `Array.prototype` - giving in ANY array gaining the ability to behave like this with other arrays, objects, and strings - simply call `initialiseGlobally()`.
 
 
+
+
 ## Why was this built?
 
-Why not? Basically I just wanted to see if it was possible to do it. Ever since I wrote [Metho](https://github.com/jonrandy/metho), I've been churning ideas in my head about what other possibilities would be opened up with similar JS syntax hacking. **Turboprop** is the first useful(?) thing to come out of the ensuing experiments.
+Basically I just wanted to see if it was possible to do it. Ever since I wrote [Metho](https://github.com/jonrandy/metho), I've been churning ideas in my head about what other possibilities would be opened up with similar JS syntax hacking. **Turboprop** is the first useful(?) thing to come out of the ensuing experiments.
 
 
 
