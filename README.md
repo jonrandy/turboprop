@@ -1,6 +1,6 @@
 # Turboprop
 
-Turboprop provides functionality to modify arrays so that they can be used as property accessors (both for getting values, and setting values). It also lets you define the methods by which the target object's properties are *get* and *set* using the array.
+Turboprop provides functionality to modify JavaScript arrays so that they can be used as property accessors (both for getting values, and setting values). It also lets you define the methods by which the target object's properties are *get* and *set* using the array.
 
 That probably seems a lot like gibberish, so the best way to explain is with some sample code:
 ```js
