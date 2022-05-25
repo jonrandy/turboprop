@@ -32,9 +32,9 @@ console.log(obj)   // { a: 33, b: 6, c: 7, d: 8, e: 66 }
 // Retrieve multiple characters from a string
 const str = "Hello world!"
 console.log(str[[0, 4, 7, 10, 11]])   // 'Hood!'
+console.log(str[6[to(10)]])   // 'world' (using 'to' from metho-number)
 
 // Strings are immutable - hence no setting
-
 
 // More useful(?) examples
 const addr = "123 High Street, My Town, My State"
