@@ -25,15 +25,15 @@ export const
  
 const DEFAULT_TARGETS = [ TARGET_STRING, TARGET_ARRAY, TARGET_OBJECT ]
 
-export function initialise(sourceArr = [], targetOrTargets = DEFAULT_TARGETS) {
+export function initialise(array = [], targetOrTargets = DEFAULT_TARGETS) {
 
 	const TURBOPROP_METHODS = Symbol('turboprop_methods')
 
 	const targets = Array.isArray(targetOrTargets) ? targetOrTargets : [targetOrTargets]
 
-	sourceArr[TURBOPROP_MARKER] = true
+	array[TURBOPROP_MARKER] = true
 
-	sourceArr[Symbol.toPrimitive] = function (hint) {
+	array[Symbol.toPrimitive] = function (hint) {
 
 		// retain normal behaviour of array coercion if asked for 'default'
 		if (hint === 'default') return this.toString()
@@ -64,7 +64,7 @@ export function initialise(sourceArr = [], targetOrTargets = DEFAULT_TARGETS) {
 
 	}
 
-	return sourceArr
+	return array
 
 }
 
