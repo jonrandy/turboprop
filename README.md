@@ -1,6 +1,6 @@
 # Turboprop
 
-Turboprop provides functionality to modify JavaScript arrays so that they can be used as property accessors (both for getting values, and setting values). It also lets you define the methods by which the target object's properties are *get* and *set* using the array.
+Turboprop provides functionality to modify JavaScript arrays so that they can be used as property accessors (both for getting, and setting values). It also lets you define the methods by which the target object's properties are *get* and *set* using the accessor array.
 
 That probably seems a lot like gibberish, so the best way to explain is with some sample code:
 ```js
@@ -32,7 +32,7 @@ console.log(obj)   // { a: 33, b: 6, c: 7, d: 8, e: 66 }
 // Retrieve multiple characters from a string
 const str = "Hello world!"
 console.log(str[[0, 4, 7, 10, 11]])   // 'Hood!'
-console.log(str[6[to(10)]])   // 'world' (using 'to' from metho-number)
+console.log(str[0[to(3)], 6[to(10)]])   // 'Hell world' (using 'to' from metho-number)
 
 // Strings are immutable - hence no setting
 
@@ -49,7 +49,7 @@ console.log(obj2)   // {item: 'box', colours:['red', 'blue', 'green']}
 
 ```
 
-If you would like the above standard behaviours to be added to `Array.prototype` - giving in ANY array gaining the ability to behave like this with other arrays, objects, and strings - simply call `initialiseGlobally()`.
+If you would like the above standard behaviours to be added to `Array.prototype` - giving ANY array gaining the ability to behave like this with other arrays, objects, and strings - simply call `initialiseGlobally()`.
 
 
 
@@ -64,9 +64,9 @@ Basically I just wanted to see if it was possible to do it. Ever since I wrote [
 
 Turboprop works by modifying the type coercion behaviour of an array so that when JS attempts to convert it to a string for the purpose of using it as a property accessor, the following things happen:
 
-* Temporary properties (named with a Symbol to avoid name clashes) are set up on predefined 'target' objects - from which the properties will be accessed
-* 'Getter' and 'Setter' methods are defined for these temporary properties. These methods are responsible for retrieving and setting values on the target objects, using the original array in whatever way they choose. After their jobs are done, they delete the temporary property to avoid clutter
-* Instead of returning a string, the Symbol that names the temporary property is returned - which causes the relevant 'getter' or 'setter' method to be triggered on the target, carrying out the property retrieval or assignment as appropriate
+* Temporary properties (named with a Symbol to avoid name clashes) are set up on predefined 'target' objects - from which the properties of the target will be accessed
+* 'Getter' and 'Setter' methods are defined for these temporary properties. These methods are responsible for retrieving and setting values on the target objects, using the original accessor array in whatever way they choose. After their job is done, they delete the temporary property to avoid clutter
+* Instead of returning a string from the coercion, the Symbol that names the temporary property is returned - which causes the relevant 'getter' or 'setter' method to be triggered on the target, carrying out the property retrieval or assignment as appropriate
 
 
 
@@ -80,7 +80,7 @@ This is just a convenience function to quickly modify `Array.prototype` so that 
 * `state` - Defaults to true - specifies whether you want to switch functionality on or off
 * `targetOrTargets` - Specifies a target, or array of targets that may have their properties accessed by arrays. If not specified, this will default to the default Turboprop targets
 
-**Important note** - because `initialiseGlobally` modifies the prototype of **all** arrays, it is possible (although unlikely) that conflicts with other libraries doing similar could occur. Despite the modification, the standard behaviour or arrays has been preserved as far as possible.
+**Important note** - because `initialiseGlobally` modifies the prototype of **all** arrays, it is possible (although unlikely) that conflicts with other libraries that do similar can occur. Despite this modification, the standard behaviour or arrays has been preserved as far as possible.
 
 ### `initialise([array], [targetOrTargets])`
 Turns the passed array into a 'Turboprop' array that can be used as a property accessor for the targets provided (see below for an explanation of 'targets'). It takes 2 optional parameters:
@@ -97,7 +97,7 @@ Checks if the passed array is already initialised as a 'Turboprop' array. Return
 
 ## Targets and Default Targets
 
-A 'target' in Turboprop is an object that defines the object to be targeted, and the functions that define how 'getting' and 'setting' of properties using an array will work:
+A 'target' in Turboprop is an object that defines the object to be targeted, and the functions that define how 'getting' and 'setting' of properties using an accessor array will work:
 ```js
 const target = {
   object: objectToTarget,
@@ -110,7 +110,7 @@ const target = {
 }
 ```
 
-The default targets in Turboprop provide common, hopefully useful functionality. The constants defining each of the defaults are also exported by the library should you wish to use them yourself:
+The default targets are `[ TARGET_STRING, TARGET_ARRAY, TARGET_OBJECT ]` - designed to provide common, hopefully useful functionality. The constants defining each of the defaults are also exported by the library should you wish to use them yourself:
 
 ```js
 // String target
@@ -144,8 +144,6 @@ const TARGET_OBJECT = {
 		setter: (keys, values, obj) => keys.forEach((key, i) => obj[key] = values[i])
 	}
 }
-
-
 ```
 
 
