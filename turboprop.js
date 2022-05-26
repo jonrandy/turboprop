@@ -35,7 +35,7 @@ export function initialise(sourceArr = [], targetOrTargets = DEFAULT_TARGETS) {
 
 	sourceArr[Symbol.toPrimitive] = function (hint) {
 
-		// retain normal behaviour of array coercion if asked for it
+		// retain normal behaviour of array coercion if asked for 'default'
 		if (hint === 'default') return this.toString()
 
 		const
