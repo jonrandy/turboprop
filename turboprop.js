@@ -4,22 +4,22 @@ export const
 	TARGET_STRING = {
 		object: String.prototype,
 		methods: {
-			getter: (keys, str) => keys.reduce((newStr, key) => newStr + str[key], ''),
+			getter: (indexes, str) => indexes.reduce((newStr, index) => newStr + str[index], ''),
 			setter: false
 		}
 	},
 	TARGET_ARRAY = {
 		object: Array.prototype,
 		methods: {
-			getter: (keys, arr) => keys.reduce((newArr, key) => [...newArr, arr[key]], []),
-			setter: (keys, values, arr) => keys.forEach((key, i) => arr[key] = values[i])
+			getter: (indexes, arr) => indexes.reduce((newArr, index) => [...newArr, arr[index]], []),
+			setter: (indexes, values, arr) => indexes.forEach((index, i) => arr[index] = values[i])
 		}
 	},
 	TARGET_OBJECT = {
 		object: Object.prototype,
 		methods: {
-			getter: (keys, arr) => keys.reduce((newArr, key) => [...newArr, arr[key]], []),
-			setter: (keys, values, arr) => keys.forEach((key, i) => arr[key] = values[i])
+			getter: (keys, obj) => keys.reduce((newArr, key) => [...newArr, obj[key]], []),
+			setter: (keys, values, obj) => keys.forEach((key, i) => obj[key] = values[i])
 		}
 	}
  
