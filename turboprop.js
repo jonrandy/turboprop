@@ -68,11 +68,11 @@ export function initialise(sourceArr = [], targetOrTargets = DEFAULT_TARGETS) {
 
 }
 
-export const isInitialisedArray = toCheck => toCheck[TURBOPROP_MARKER]
+export const isInitialisedArray = array => array[TURBOPROP_MARKER]
 
-export const initialiseGlobally = (state = true, targets = DEFAULT_TARGETS) => {
+export const initialiseGlobally = (state = true, targetOrTargets = DEFAULT_TARGETS) => {
 	if (state) {
-		initialise(Array.prototype, targets)
+		initialise(Array.prototype, targetOrTargets)
 	} else {
 		delete Array.prototype[Symbol.toPrimitive]	
 	}
