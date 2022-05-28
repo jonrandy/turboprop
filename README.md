@@ -103,9 +103,9 @@ const target = {
   object: objectToTarget,
   methods: {
     // logic to 'get' and return properties from targetObject
-		getter: (propNamesAr, targetObject) => returnVal,
+    getter: (propNamesAr, targetObject) => returnVal,
     // logic to 'set' properties on targetObject (any return value is discarded)
-		setter: (propNamesArr, valuesToSet, targetObject) => {}
+    setter: (propNamesArr, valuesToSet, targetObject) => {}
   }
 }
 ```
@@ -116,35 +116,33 @@ The default targets are `[ TARGET_STRING, TARGET_ARRAY, TARGET_OBJECT ]` - desig
 // String target
 // Will 'get' a concatenation of chars specified by the indexes defined in the accessor array
 const TARGET_STRING = {
-	object: String.prototype,
-	methods: {
-		getter: (indexes, str) => indexes.reduce((newStr, index) => newStr + str[index], ''),
-		setter: false
-	}
+  object: String.prototype,
+  methods: {
+    getter: (indexes, str) => indexes.reduce((newStr, index) => newStr + str[index], ''),
+    setter: false
+  }
 }
 
 // Array target
 // Will 'get' an array of values specified by the indexes defined in the accessor array
 // Will 'set' the values into the array slots specified by the indexes defined in the accessor array
 const TARGET_ARRAY = {
-	object: Array.prototype,
-	methods: {
-		getter: (indexes, arr) => indexes.reduce((newArr, index) => [...newArr, arr[index]], []),
-		setter: (indexes, values, arr) => indexes.forEach((index, i) => arr[index] = values[i])
-	}
+  object: Array.prototype,
+  methods: {
+    getter: (indexes, arr) => indexes.reduce((newArr, index) => [...newArr, arr[index]], []),
+    setter: (indexes, values, arr) => indexes.forEach((index, i) => arr[index] = values[i])
+  }
 }
 
 // Object target
 // Will 'get' an array of values specified by the property names defined in the accessor array
 // Will 'set' the object properties specified by the property names defined in the accessor array
 const TARGET_OBJECT = {
-	object: Object.prototype,
-	methods: {
-		getter: (keys, obj) => keys.reduce((newArr, key) => [...newArr, obj[key]], []),
-		setter: (keys, values, obj) => keys.forEach((key, i) => obj[key] = values[i])
-	}
+  object: Object.prototype,
+  methods: {
+    getter: (keys, obj) => keys.reduce((newArr, key) => [...newArr, obj[key]], []),
+    setter: (keys, values, obj) => keys.forEach((key, i) => obj[key] = values[i])
+  }
 }
 ```
-
-
 
