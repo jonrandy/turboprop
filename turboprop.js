@@ -35,7 +35,7 @@ export function initialise(array = [], targetOrTargets = DEFAULT_TARGETS) {
 
 	array[Symbol.toPrimitive] = function (hint) {
 
-		// retain normal behaviour of array coercion if asked for 'default'
+		// retain normal behaviour of array coercion if asked for 'default' or 'number'
 		if (hint === 'default') return this.toString()
 		if (hint === 'number') return Number(this.toString())
 

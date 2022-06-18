@@ -1,6 +1,6 @@
 {
   "name": "turboprop",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Metho-like library to allow use of arrays as property accessors",
   "main": "turboprop.js",
   "type": "module",
