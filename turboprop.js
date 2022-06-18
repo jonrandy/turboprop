@@ -37,6 +37,7 @@ export function initialise(array = [], targetOrTargets = DEFAULT_TARGETS) {
 
 		// retain normal behaviour of array coercion if asked for 'default'
 		if (hint === 'default') return this.toString()
+		if (hint === 'number') return Number(this.toString())
 
 		const
 			keys = this.map(key => (Array.isArray(key) && !isInitialisedArray(key)) ? initialise(key, targets) : key),
