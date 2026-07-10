@@ -103,7 +103,7 @@ const target = {
   object: objectToTarget,
   methods: {
     // logic to 'get' and return properties from targetObject
-    getter: (propNamesAr, targetObject) => returnVal,
+    getter: (propNamesArr, targetObject) => returnVal,
     // logic to 'set' properties on targetObject (any return value is discarded)
     setter: (propNamesArr, valuesToSet, targetObject) => {}
   }
